@@ -1,32 +1,35 @@
 // app/api/users/[id]/status/route.ts
-import { NextResponse } from 'next/server';
-
 import { generateTokenExpiry } from '@/utils/authHelpers';
-import { db } from '@/db/db'
+import { db } from '@/db/db';
+import { errorResponse, successResponse } from '@/app/api/responses/responses';
+
+async function updateUserStatus(userId: string, status: string, tokenExpiresAt: string): Promise<number> {
+    return new Promise((resolve, reject) => {
+        db.run(
+            `UPDATE users SET status = ?, token_expires_at = ? WHERE id = ?`,
+            [status, tokenExpiresAt, userId],
+            function (err) {
+                if (err) reject(err);
+                else resolve(this.changes); // Number of rows affected
+            }
+        );
+    });
+}
 
 export async function PATCH(req: Request, { params }: { params: { id: string } }) {
     const userId = params.id;
-    const newTokenExpiresAt = generateTokenExpiry(168)
+    const newTokenExpiresAt = generateTokenExpiry(168);
 
     try {
-        const result = await new Promise((resolve, reject) => {
-            db.run(
-                `UPDATE users SET status = ?, token_expires_at = ? WHERE id = ?`,
-                ['VERIFIED', newTokenExpiresAt, userId],
-                function (err) {
-                    if (err) reject(err);
-                    else resolve(this.changes); // Number of rows affected
-                }
-            );
-        });
+        const result = await updateUserStatus(userId, 'VERIFIED', newTokenExpiresAt);
 
         if (result === 0) {
-            return NextResponse.json({ error: 'User not found' }, { status: 404 });
+            return errorResponse('User not found', 404);
         }
 
-        return NextResponse.json({ message: 'User status updated to VERIFIED' });
+        return successResponse({ message: 'User status updated to VERIFIED' });
     } catch (error) {
         console.error('Error updating user status:', error);
-        return NextResponse.json({ error: 'Failed to update user status' }, { status: 500 });
+        return errorResponse('Failed to update user status', 500);
     }
 }

@@ -4,7 +4,7 @@ function SignInPage() {
     return (
         <div className='flex flex-col items-center justify-center h-screen w-screen'>
             <SignInForm />
-            <span>Don't have a user?<a className="underline" href="/signup">Click here to sign up</a> </span>
+            <span>Do not have a user?<a className="underline" href="/signup">Click here to sign up</a> </span>
         </div>
     )
 }

@@ -1,10 +1,11 @@
 'use client';
 import { Confirmation } from '@/components/confirmation';
+// import { Confirmation } from '@/components/confirmation';
 import { isTokenValid } from '@/utils/authHelpers';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function VerificationPage() {
+function VerificationPage() {
     const searchParams = useSearchParams();
     const userId = searchParams.get('userId');
     const [user, setUser] = useState<{ email: string; id: number } | null>(null);
@@ -110,7 +111,7 @@ export default function VerificationPage() {
         };
     }, [userId]);
 
-    if (!user && !error) return <p>Loading...</p>;
+    if (!user && !error) return (<p>Loading...</p>);
     if (error) return (
         <div className='flex flex-col h-screen justify-center items-center'>
             <p>Error: {error}</p>
@@ -126,3 +127,6 @@ export default function VerificationPage() {
         </div>
     );
 }
+
+
+export default VerificationPage
