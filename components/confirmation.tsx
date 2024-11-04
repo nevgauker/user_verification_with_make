@@ -30,7 +30,7 @@ const FormSchema = z.object({
 })
 
 export function Confirmation({ code, userId }: { code: number, userId: number }) {
-    const { setUserId } = useUser();
+    const { setUserId } = useUser()
     const router = useRouter()
 
     const [error, setError] = useState<string | undefined>(undefined)
