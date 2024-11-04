@@ -1,14 +1,11 @@
 'use client'
 
-import { useRouter } from "next/navigation";
 import { Button } from "./ui/button"
 import { useUser } from "@/contexts/user_context"
-import { revalidatePath } from "next/cache";
 
 function UserInfo() {
 
     const { setUserId, userId } = useUser();
-    const router = useRouter()
 
     function signOut() {
         setUserId(null)

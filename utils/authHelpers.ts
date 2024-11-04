@@ -17,7 +17,7 @@ export function generateTokenExpiry(hours = 48): string {
     const expiryDate = new Date(Date.now() + hours * 60 * 60 * 1000);
     return expiryDate.toISOString() // Return the expiration date as a string
 }
-
+//for testing
 export function generateInvalidTokenExpiry(hours = 48): string {
     const expiryDate = new Date(Date.now() - hours * 60 * 60 * 1000);
     return expiryDate.toISOString() // Return the expiration date as a string

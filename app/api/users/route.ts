@@ -18,7 +18,7 @@ interface User {
 export async function POST(request: Request) {
     const { email, password, isSignIn = false } = await request.json()
     const verificationToken = generateToken()
-    const tokenExpiresAt = generateInvalidTokenExpiry()//   generateTokenExpiry()
+    const tokenExpiresAt = generateTokenExpiry()
     return new Promise((resolve) => {
 
         if (isSignIn) {

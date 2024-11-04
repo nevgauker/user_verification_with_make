@@ -1,9 +1,8 @@
 'use client';
 import { Confirmation } from '@/components/confirmation';
-import { apiHeaders, isTokenValid } from '@/utils/authHelpers';
+import { isTokenValid } from '@/utils/authHelpers';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { isValid } from 'zod';
 
 export default function VerificationPage() {
     const searchParams = useSearchParams();
