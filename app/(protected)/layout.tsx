@@ -9,7 +9,7 @@ interface ProtectedLayoutProps {
     children: ReactNode;
 }
 
-export default async function ProtectedLayout({ children }: ProtectedLayoutProps) {
+export default function ProtectedLayout({ children }: ProtectedLayoutProps) {
     const { userId } = useUser()
     if (!userId) {
         redirect('/signup') // Redirect if userId is null.

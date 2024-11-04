@@ -20,13 +20,13 @@ export const metadata: Metadata = {
   description: "User Verification",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
 
-  await initialize()
+  initialize()
   return (
     <html lang="en">
       <body
