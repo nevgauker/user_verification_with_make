@@ -2,7 +2,7 @@
 
 'use client'
 import { ReactNode } from 'react'
-import { redirect, useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import { useUser } from '@/contexts/user_context'
 
 interface ProtectedLayoutProps {
@@ -11,8 +11,6 @@ interface ProtectedLayoutProps {
 
 export default async function ProtectedLayout({ children }: ProtectedLayoutProps) {
     const { userId } = useUser()
-    const router = useRouter()
-
     if (!userId) {
         redirect('/signup') // Redirect if userId is null.
     }
